@@ -1,0 +1,25 @@
+#!/bin/bash
+
+x=`sudo ls /dev/video* | tr " " "/n" | wc -l`
+
+camera=()
+
+table=()
+
+for((i=1;$i <= $x;i++))
+
+        do
+
+        y=`sudo ls /dev/video* | tr " " "/n" | grep -m$i "video" | tail -n1`
+
+        camera[i]=`sudo udevadm info --query=all $y | grep "ID_V4L_PRODUCT" | awk '{print substr($0,19)}'`
+
+        done
+
+#       echo "${camera[@]}";
+
+        echo "${camera[1]}";
+
+        echo "${camera[2]}";
+
+        echo $x;
